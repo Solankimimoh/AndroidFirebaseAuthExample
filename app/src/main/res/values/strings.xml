@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">L.J. Engineering College</string>
+    <string name="loginScreen">Login</string>
+    <string name="hint_email">Enter You Email</string>
+    <string name="hint_pwd">Enter Your Password</string>
+    <string name="login_btn">Login</string>
+    <string name="goto_signup">Not Registered User ?</string>
+    <string name="forgot_pwd">Forgot Password ?</string>
+    <string name="val_err_email">Please Enter your Valid email id</string>
+    <string name="signup">Sign Up</string>
+    <string name="hint_name">Enter your Name</string>
+    <string name="hint_enrollment">Enter Your Enrollment</string>
+    <string name="hint_mobile">Enter Your Mobile</string>
+    <string name="already_registered">Already Registered user?</string>
+    <string name="err_password">The password should contain at least 8 characters, including at least one lower case letter, one upper case letter, one number and one punctuation mark</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_college_location">Map</string>
+    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="btn_back"><![CDATA[<< Back]]></string>
+
+
+</resources>

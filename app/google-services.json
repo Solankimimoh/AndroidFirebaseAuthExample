@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "223254453577",
+    "firebase_url": "https://ljcollege-f7620.firebaseio.com",
+    "project_id": "ljcollege-f7620",
+    "storage_bucket": "ljcollege-f7620.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223254453577:android:aae829decb205b76",
+        "android_client_info": {
+          "package_name": "com.lj.ljengineeringcollege"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223254453577-3dbp2j5hu918mbg3h4d565j9iuamcmjd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lj.ljengineeringcollege",
+            "certificate_hash": "f7f4f648b701b5c5c14b7add086a93f52e8082d0"
+          }
+        },
+        {
+          "client_id": "223254453577-bc2ogae6hbdaqget2bvhfnc24cm10j61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU1xcZxwc_DJ711LhTuQTiViZLA60YJbE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223254453577-bc2ogae6hbdaqget2bvhfnc24cm10j61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
