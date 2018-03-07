@@ -36,7 +36,7 @@
             android:label="@string/loginScreen" />
         <activity
             android:name=".SignupActivity"
-            android:label="@string/signup" />
+            android:label="@string/student" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -57,7 +57,9 @@
             android:name=".CollegeLocationActivity"
             android:label="@string/title_activity_college_location" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".FacultyRegistrationActivity"></activity>
+        <activity
+            android:name=".FacultyRegistrationActivity"
+            android:label="@string/faculty"></activity>
     </application>
 
 </manifest>

@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
 
 //        Validation Rule
-        mAwesomeValidation.addValidation(LoginActivity.this, R.id.activity_signup_email_ed, android.util.Patterns.EMAIL_ADDRESS, R.string.val_err_email);
+        mAwesomeValidation.addValidation(LoginActivity.this, R.id.activity_faculty_registration_email_ed, android.util.Patterns.EMAIL_ADDRESS, R.string.val_err_email);
 //        mAwesomeValidation.addValidation(LoginActivity.this, R.id.activity_signup_password_ed, regexPassword, R.string.err_password);
 
 
@@ -116,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.e(TAG, "signInWithEmail:success");
                                 progressDialog.setMessage("Email Verifying ....");
-                                checkIfEmailVerified();
+                                checkAccountVerified();
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.e(TAG, "signInWithEmail:failure", task.getException());
@@ -132,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //            Toast.makeText(this, "Validate the function", Toast.LENGTH_SHORT).show();
     }
 
-    private void checkIfEmailVerified() {
+    private void checkAccountVerified() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user.isEmailVerified()) {
             // user is verified, so you can finish this activity or send user to activity which you want.

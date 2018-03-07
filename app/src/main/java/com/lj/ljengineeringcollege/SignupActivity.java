@@ -1,6 +1,7 @@
 package com.lj.ljengineeringcollege;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,7 +62,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mDatabase = database.getReference("users");
+        mDatabase = database.getReference("students");
 
         initView();
 
@@ -71,17 +72,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         //Initilization of widgets
 
-        fullNameEd = findViewById(R.id.activity_signup_name_ed);
-        emailEd = findViewById(R.id.activity_signup_email_ed);
-        pwdEd = findViewById(R.id.activity_signup_password_ed);
+        fullNameEd = findViewById(R.id.activity_faculty_registration_name_ed);
+        emailEd = findViewById(R.id.activity_faculty_registration_email_ed);
+        pwdEd = findViewById(R.id.activity_faculty_registration_password_ed);
         enrollmentEd = findViewById(R.id.activity_signup_enrollment_ed);
-        mobileEd = findViewById(R.id.activity_signup_mobile_ed);
-        departmentSp = findViewById(R.id.activity_signup_department_spinner);
+        mobileEd = findViewById(R.id.activity_faculty_registration_mobile_ed);
+        departmentSp = findViewById(R.id.activity_faculty_registration_department_spinner);
         semesterSp = findViewById(R.id.activity_signup_semester_spinner);
 
         alreadyRegisteredTv = findViewById(R.id.activity_signup_already_registered_txt);
         facultyRegistrationTv = findViewById(R.id.activity_signup_faculty_registration_tv);
-        signupBtn = findViewById(R.id.activity_signup_btn);
+        signupBtn = findViewById(R.id.activity_faculty_registration_btn);
 
         progressDialog = new ProgressDialog(SignupActivity.this);
         progressDialog.setCancelable(false);
@@ -102,11 +103,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.activity_signup_already_registered_txt:
                 finish();
                 break;
-            case R.id.activity_signup_btn:
+            case R.id.activity_faculty_registration_btn:
                 singupStudent();
                 break;
             case R.id.activity_signup_faculty_registration_tv:
-
+                Intent gotoFacultyRegistration = new Intent(SignupActivity.this, FacultyRegistrationActivity.class);
+                startActivity(gotoFacultyRegistration);
                 break;
         }
     }
@@ -149,18 +151,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                                     if (databaseError != null) {
                                                         Toast.makeText(SignupActivity.this, databaseError.toString(), Toast.LENGTH_SHORT).show();
                                                     } else {
-                                                        progressDialog.setMessage("Sending Verification Mail");
-                                                        user.sendEmailVerification().addOnCompleteListener(SignupActivity.this, new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    Toast.makeText(SignupActivity.this, "Success ! Check mail for verification", Toast.LENGTH_SHORT).show();
-                                                                    progressDialog.hide();
-                                                                } else {
-                                                                    Log.e("Success", "No" + task.getException());
-                                                                }
-                                                            }
-                                                        });
+                                                        Toast.makeText(SignupActivity.this, "Success ! Faculty will Verify your account !", Toast.LENGTH_SHORT).show();
+                                                        progressDialog.hide();
+
                                                     }
                                                 }
                                             });
@@ -174,7 +167,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         final Spinner spinner = (Spinner) adapterView;
         switch (spinner.getId()) {
-            case R.id.activity_signup_department_spinner:
+            case R.id.activity_faculty_registration_department_spinner:
                 department = spinner.getSelectedItem().toString();
                 break;
             case R.id.activity_signup_semester_spinner:
