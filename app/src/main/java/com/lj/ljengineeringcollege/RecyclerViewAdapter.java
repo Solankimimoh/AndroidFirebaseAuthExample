@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    ArrayList<DataModel> mValues;
+    ArrayList<HomeMenuItemModel> mValues;
     Context mContext;
     protected ItemListener mListener;
 
-    public RecyclerViewAdapter(Context context, ArrayList<DataModel> values, ItemListener itemListener) {
+    public RecyclerViewAdapter(Context context, ArrayList<HomeMenuItemModel> values, ItemListener itemListener) {
 
         mValues = values;
         mContext = context;
@@ -31,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView textView;
         public ImageView imageView;
         public RelativeLayout relativeLayout;
-        DataModel item;
+        HomeMenuItemModel item;
 
         public ViewHolder(View v) {
 
@@ -44,7 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
 
-        public void setData(DataModel item) {
+        public void setData(HomeMenuItemModel item) {
             this.item = item;
 
             textView.setText(item.text);
@@ -83,6 +83,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public interface ItemListener {
-        void onItemClick(DataModel item);
+        void onItemClick(HomeMenuItemModel item);
     }
 }

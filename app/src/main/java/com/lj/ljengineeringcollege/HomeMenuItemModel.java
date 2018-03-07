@@ -4,14 +4,14 @@ package com.lj.ljengineeringcollege;
  * Created by anupamchugh on 11/02/17.
  */
 
-public class DataModel {
+public class HomeMenuItemModel {
 
 
     public String text;
     public int drawable;
     public String color;
 
-    public DataModel(String t, int d, String c )
+    public HomeMenuItemModel(String t, int d, String c )
     {
         text=t;
         drawable=d;

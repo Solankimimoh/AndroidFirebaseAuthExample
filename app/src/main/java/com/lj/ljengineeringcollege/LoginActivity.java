@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +23,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(COLORATION);
     final String TAG = LoginActivity.class.getSimpleName();
 
     private EditText emailEd;
     private EditText pwdEd;
+    private RadioGroup loginTypeRG;
     private Button loginBtn;
     private TextView gotoSingup;
     private TextView gotoForgotoPwd;
@@ -59,8 +61,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView() {
-        emailEd = findViewById(R.id.activity_signup_email_ed);
-        pwdEd = findViewById(R.id.activity_signup_password_ed);
+
+        emailEd = findViewById(R.id.activity_login_email_ed);
+        pwdEd = findViewById(R.id.activity_login_password_ed);
+        loginTypeRG = findViewById(R.id.activity_login_type_rg);
+
         loginBtn = findViewById(R.id.activity_login_login_btn);
         gotoSingup = findViewById(R.id.activity_login_goto_signup_txt);
         gotoForgotoPwd = findViewById(R.id.activity_login_forgot_pwd_txt);
@@ -69,6 +74,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Login");
         progressDialog.setMessage("Checking credentials..");
+
+
+        loginTypeRG.setOnCheckedChangeListener(this);
 
         loginBtn.setOnClickListener(this);
         gotoSingup.setOnClickListener(this);
@@ -142,6 +150,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(LoginActivity.this, "Please Verified your email", Toast.LENGTH_SHORT).show();
             FirebaseAuth.getInstance().signOut();
             //restart this activity
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        switch (radioGroup.getCheckedRadioButtonId()) {
+            case R.id.activity_login_faculty_rb:
+                Toast.makeText(this, "FACULTY", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.activity_login_student_rb:
+                Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 

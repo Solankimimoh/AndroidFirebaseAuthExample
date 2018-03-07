@@ -56,7 +56,8 @@
         <activity
             android:name=".CollegeLocationActivity"
             android:label="@string/title_activity_college_location" />
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".FacultyRegistrationActivity"></activity>
     </application>
 
 </manifest>

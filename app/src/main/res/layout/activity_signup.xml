@@ -109,6 +109,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/activity_signup_enrollment_ed" />
 
+        <Spinner
+            android:id="@+id/activity_signup_department_spinner"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:entries="@array/departmentArray"
+            android:prompt="@string/select_department"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_signup_mobile_ed" />
+
+        <Spinner
+            android:id="@+id/activity_signup_semester_spinner"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:entries="@array/semesterArray"
+            android:prompt="@string/select_semester"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_signup_department_spinner" />
+
         <Button
             android:id="@+id/activity_signup_btn"
             android:layout_width="0dp"
@@ -125,7 +155,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_signup_mobile_ed"
+            app:layout_constraintTop_toBottomOf="@+id/activity_signup_semester_spinner"
             tools:targetApi="lollipop" />
 
         <TextView
@@ -139,6 +169,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/activity_signup_btn" />
+
+        <TextView
+            android:id="@+id/activity_signup_faculty_registration_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/faculty_reg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_signup_btn"
+            app:layout_constraintVertical_bias="0.49" />
 
 
     </android.support.constraint.ConstraintLayout>

@@ -24,6 +24,38 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="btn_reset_password">Reset Password</string>
     <string name="btn_back"><![CDATA[<< Back]]></string>
+    <string name="faculty">Faculty</string>
+    <string name="student">Student</string>
+    <string name="faculty_reg">Faculty Registration?</string>
+    <string name="select_department">Select Department</string>
+    <string name="select_semester">Select Semester</string>
 
 
+    <!--Department Array-->
+    <string-array name="departmentArray">
+        <item>Chemical engineering</item>
+        <item>Computer engineering</item>
+        <item>Civil engineering</item>
+        <item>Applied mechanics department</item>
+        <item>Electrical engineering</item>
+        <item>Electronics communication engineering</item>
+        <item>Information technology</item>
+        <item>Instrumentation Control engineering</item>
+        <item>Mechanical engineering</item>
+        <item>Power electronics engineeering</item>
+        <item>General department</item>
+    </string-array>
+
+
+    <!--Semester Array-->
+    <string-array name="semesterArray">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 </resources>

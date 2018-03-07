@@ -2,8 +2,6 @@ package com.lj.ljengineeringcollege;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -12,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +31,7 @@ public class HomeActivity extends AppCompatActivity
     private TextView userEmailTv;
     private DatabaseReference DataRef;
     private RecyclerView recyclerView;
-    private ArrayList<DataModel> arrayList;
+    private ArrayList<HomeMenuItemModel> arrayList;
 
 
     @Override
@@ -64,9 +61,15 @@ public class HomeActivity extends AppCompatActivity
         DataRef.child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Users user = dataSnapshot.getValue(Users.class);
-                userNameTv.setText(user.getUserFullName());
-                userEmailTv.setText(user.getUserEmail());
+                StudentModel user = dataSnapshot.getValue(StudentModel.class);
+                if (user != null) {
+                    userNameTv.setText(user.getFullName());
+                    userEmailTv.setText(user.getEmail());
+                } else {
+                    auth.signOut();
+                    finish();
+                }
+
             }
 
             @Override
@@ -77,12 +80,12 @@ public class HomeActivity extends AppCompatActivity
         });
 
         arrayList = new ArrayList<>();
-        arrayList.add(new DataModel("Department", R.drawable.vector_aboutus, "#09A9FF"));
-        arrayList.add(new DataModel("Gallery", R.drawable.vector_email, "#3E51B1"));
-        arrayList.add(new DataModel("SBI FEES", R.drawable.vector_developer, "#673BB7"));
-        arrayList.add(new DataModel("Notification", R.drawable.vector_mobile, "#4BAA50"));
-        arrayList.add(new DataModel("About Us", R.drawable.vector_user, "#F94336"));
-        arrayList.add(new DataModel("Contact Us", R.drawable.vector_location, "#0A9B88"));
+        arrayList.add(new HomeMenuItemModel("Department", R.drawable.vector_aboutus, "#09A9FF"));
+        arrayList.add(new HomeMenuItemModel("Gallery", R.drawable.vector_email, "#3E51B1"));
+        arrayList.add(new HomeMenuItemModel("SBI FEES", R.drawable.vector_developer, "#673BB7"));
+        arrayList.add(new HomeMenuItemModel("Notification", R.drawable.vector_mobile, "#4BAA50"));
+        arrayList.add(new HomeMenuItemModel("About Us", R.drawable.vector_user, "#F94336"));
+        arrayList.add(new HomeMenuItemModel("Contact Us", R.drawable.vector_location, "#0A9B88"));
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, arrayList, this);
         recyclerView.setAdapter(adapter);
@@ -122,7 +125,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemClick(DataModel item) {
+    public void onItemClick(HomeMenuItemModel item) {
         switch (item.text) {
 
             case "Contact Us":

@@ -27,7 +27,7 @@
             tools:ignore="VectorDrawableCompat" />
 
         <EditText
-            android:id="@+id/activity_signup_email_ed"
+            android:id="@+id/activity_login_email_ed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/login_logo_img" />
 
         <EditText
-            android:id="@+id/activity_signup_password_ed"
+            android:id="@+id/activity_login_password_ed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -57,7 +57,34 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_signup_email_ed" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_login_email_ed" />
+
+        <RadioGroup
+            android:id="@+id/activity_login_type_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:checkedButton="@id/activity_login_faculty_rb"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.08"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_login_password_ed">
+
+            <RadioButton
+                android:id="@+id/activity_login_faculty_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/faculty" />
+
+            <RadioButton
+                android:id="@+id/activity_login_student_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/student" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/activity_login_login_btn"
@@ -65,14 +92,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@color/colorAccent"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/login_btn"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_signup_password_ed" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_login_type_rg" />
 
         <TextView
             android:id="@+id/activity_login_goto_signup_txt"
@@ -101,21 +128,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/activity_login_login_btn" />
-
-        <ProgressBar
-            android:id="@+id/activity_login_progessbar"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>
