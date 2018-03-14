@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,65 +19,82 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    AwesomeValidation mAwesomeValidation = new AwesomeValidation(COLORATION);
     final String TAG = LoginActivity.class.getSimpleName();
+    AwesomeValidation mAwesomeValidation = new AwesomeValidation(COLORATION);
 
     private EditText emailEd;
     private EditText pwdEd;
-    private RadioGroup loginTypeRG;
+    private RadioGroup loginTypeRg;
     private Button loginBtn;
     private TextView gotoSingup;
     private TextView gotoForgotoPwd;
+
+    //    Firebase
     private FirebaseAuth auth;
     private ProgressDialog progressDialog;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
+//    variable
+
+    private String loginType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        auth = FirebaseAuth.getInstance();
 
+        auth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+//        if (auth.getCurrentUser() != null) {
+//            auth.signOut();
+//            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//            finish();
+//        }
         initView();
 
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish();
-        }
 
-        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
-
-//        Validation Rule
-        mAwesomeValidation.addValidation(LoginActivity.this, R.id.activity_faculty_registration_email_ed, android.util.Patterns.EMAIL_ADDRESS, R.string.val_err_email);
-//        mAwesomeValidation.addValidation(LoginActivity.this, R.id.activity_signup_password_ed, regexPassword, R.string.err_password);
+        initValidationRules();
 
 
     }
 
+    private void initValidationRules() {
+        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
+        mAwesomeValidation.addValidation(LoginActivity.this, R.id.activity_faculty_registration_email_ed, android.util.Patterns.EMAIL_ADDRESS, R.string.val_err_email);
+        //        mAwesomeValidation.addValidation(LoginActivity.this, R.id.activity_signup_password_ed, regexPassword, R.string.err_password);
+    }
+
     private void initView() {
 
+        //Componenet Initlization
         emailEd = findViewById(R.id.activity_login_email_ed);
         pwdEd = findViewById(R.id.activity_login_password_ed);
-        loginTypeRG = findViewById(R.id.activity_login_type_rg);
-
+        loginTypeRg = findViewById(R.id.activity_login_type_rg);
         loginBtn = findViewById(R.id.activity_login_login_btn);
         gotoSingup = findViewById(R.id.activity_login_goto_signup_txt);
         gotoForgotoPwd = findViewById(R.id.activity_login_forgot_pwd_txt);
 
+        //ProgressDialog
         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Login");
         progressDialog.setMessage("Checking credentials..");
 
 
-        loginTypeRG.setOnCheckedChangeListener(this);
-
+        //Event Listener
+        loginTypeRg.setOnCheckedChangeListener(this);
         loginBtn.setOnClickListener(this);
         gotoSingup.setOnClickListener(this);
         gotoForgotoPwd.setOnClickListener(this);
@@ -99,12 +117,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void checkLogin() {
+
         String email = emailEd.getText().toString();
         String password = pwdEd.getText().toString();
 
-        if (mAwesomeValidation.validate()) {
+        if (loginTypeRg.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(this, "Please Choose Login Type", Toast.LENGTH_SHORT).show();
+        }
 
-            progressDialog.show();
+
+        if (mAwesomeValidation.validate()) {
+            //progressDialog.show();
             progressDialog.setMessage("Check Email ID and password...");
 
             auth.signInWithEmailAndPassword(email, password)
@@ -114,8 +137,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.e(TAG, "signInWithEmail:success");
+
+                                switch (loginTypeRg.getCheckedRadioButtonId()) {
+                                    case R.id.activity_login_faculty_rb:
+//                                        databaseReference
+                                        break;
+                                    case R.id.activity_login_student_rb:
+                                        break;
+                                }
                                 progressDialog.setMessage("Email Verifying ....");
-                                checkAccountVerified();
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.e(TAG, "signInWithEmail:failure", task.getException());
@@ -125,44 +155,58 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                     });
+//            databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    FacultyModel facultyModel = dataSnapshot.getValue(FacultyModel.class);
+//                    Toast.makeText(LoginActivity.this, facultyModel.isActivated() + "", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
+
+
         }
 
 
-//            Toast.makeText(this, "Validate the function", Toast.LENGTH_SHORT).show();
-    }
-
-    private void checkAccountVerified() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user.isEmailVerified()) {
-            // user is verified, so you can finish this activity or send user to activity which you want.
-            // finish();
-            progressDialog.hide();
-            emailEd.setText("");
-            pwdEd.setText("");
-            Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
-            Intent gotoHome = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(gotoHome);
-        } else {
-            // email is not verified, so just prompt the message to the user and restart this activity.
-            // NOTE: don't forget to log out the user.
-            progressDialog.hide();
-            Toast.makeText(LoginActivity.this, "Please Verified your email", Toast.LENGTH_SHORT).show();
-            FirebaseAuth.getInstance().signOut();
-            //restart this activity
-        }
     }
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.activity_login_faculty_rb:
-                Toast.makeText(this, "FACULTY", Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.activity_login_student_rb:
-                Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
+
+//    private void checkAccountVerified() {
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user.isEmailVerified()) {
+//            // user is verified, so you can finish this activity or send user to activity which you want.
+//            // finish();
+//            progressDialog.hide();
+//            emailEd.setText("");
+//            pwdEd.setText("");
+//            Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+//            Intent gotoHome = new Intent(LoginActivity.this, HomeActivity.class);
+//            startActivity(gotoHome);
+//        } else {
+//            // email is not verified, so just prompt the message to the user and restart this activity.
+//            // NOTE: don't forget to log out the user.
+//            progressDialog.hide();
+//            Toast.makeText(LoginActivity.this, "Please Verified your email", Toast.LENGTH_SHORT).show();
+//            FirebaseAuth.getInstance().signOut();
+//            //restart this activity
+//        }
+//    }
+
 
 }
 

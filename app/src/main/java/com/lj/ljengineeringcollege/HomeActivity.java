@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();
-        DataRef = FirebaseDatabase.getInstance().getReference().child("users");
+        DataRef = FirebaseDatabase.getInstance().getReference().child(AppConstant.FIREBASE_TABLE_STUDNET);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
 

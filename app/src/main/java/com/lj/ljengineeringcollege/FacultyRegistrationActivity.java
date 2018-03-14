@@ -1,6 +1,7 @@
 package com.lj.ljengineeringcollege;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -133,6 +134,9 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
                                 Toast.makeText(FacultyRegistrationActivity.this, databaseError.toString(), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(FacultyRegistrationActivity.this, "Success ! Admin verify your account soon!", Toast.LENGTH_SHORT).show();
+                                Intent gotoLogin = new Intent(FacultyRegistrationActivity.this, LoginActivity.class);
+                                startActivity(gotoLogin);
+                                finish();
                                 progressDialog.hide();
                             }
                         }
