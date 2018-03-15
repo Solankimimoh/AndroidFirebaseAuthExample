@@ -23,7 +23,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/lg_logo"
+            app:srcCompat="@drawable/lj_logo"
             tools:ignore="VectorDrawableCompat" />
 
         <EditText

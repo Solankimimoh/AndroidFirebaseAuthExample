@@ -109,11 +109,12 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
         password = passwordEd.getText().toString().trim();
         mobile = mobileEd.getText().toString().trim();
 
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(FacultyRegistrationActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                Log.e("TAG","CREATE USER");
+                Log.e("TAG", "CREATE USER");
                 if (!task.isSuccessful()) {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(FacultyRegistrationActivity.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
@@ -121,9 +122,13 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
                     }
                 } else {
                     String userId = auth.getCurrentUser().getUid();
-                    Log.e("TAG","INSERT USER");
-                    mDatabase.child(userId).setValue(new FacultyModel(mobile
-                            , password
+                    Log.e("TAG", "INSERT USER");
+                    mDatabase.child(userId).setValue(new FacultyModel(fullname,
+                            email,
+                            password,
+                            mobile,
+                            department,
+                            false
                     ), new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

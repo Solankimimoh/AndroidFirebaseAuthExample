@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     final String TAG = LoginActivity.class.getSimpleName();
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(COLORATION);
@@ -117,11 +117,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void checkLogin() {
 
-        String email = emailEd.getText().toString();
-        String password = pwdEd.getText().toString();
+        final String email = emailEd.getText().toString();
+        final String password = pwdEd.getText().toString();
 
         if (loginTypeRg.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, "Please Choose Login Type", Toast.LENGTH_SHORT).show();
+            return;
         }
 
 
@@ -173,14 +174,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     progressDialog.hide();
                 } else {
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        Log.e("TAG", data.child("isIsactivated").getValue().toString());
-                        boolean status = Boolean.parseBoolean(data.child("isIsactivated").getValue().toString());
+                        Log.e("TAG", data.child(AppConstant.FIREBASE_DB_ISACTIVATED).getValue().toString());
+                        boolean status = Boolean.parseBoolean(data.child(AppConstant.FIREBASE_DB_ISACTIVATED).getValue().toString());
                         if (status) {
                             //do ur stuff
                             progressDialog.hide();
-                            Toast.makeText(LoginActivity.this, "Email ID is not verified yet ! ", Toast.LENGTH_SHORT).show();
                         } else {
                             progressDialog.hide();
+                            Toast.makeText(LoginActivity.this, "Email ID is not verified yet ! ", Toast.LENGTH_SHORT).show();
+
                             //do something
                         }
                     }

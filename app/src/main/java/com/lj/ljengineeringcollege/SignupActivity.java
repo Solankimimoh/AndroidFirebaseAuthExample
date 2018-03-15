@@ -133,6 +133,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                 Toast.makeText(SignupActivity.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
                                 progressDialog.hide();
                             }
+                            progressDialog.hide();
+                            Toast.makeText(SignupActivity.this, task.getException() + "", Toast.LENGTH_SHORT).show();
+                            Log.e("TAG", task.getException() + "");
+
                         } else {
                             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String userId = user.getUid();

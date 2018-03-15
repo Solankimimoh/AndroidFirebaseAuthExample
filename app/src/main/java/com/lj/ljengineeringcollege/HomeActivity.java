@@ -63,8 +63,8 @@ public class HomeActivity extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot) {
                 StudentModel user = dataSnapshot.getValue(StudentModel.class);
                 if (user != null) {
-                    userNameTv.setText(user.getFullname());
-                    userEmailTv.setText(user.getEmail());
+//                    userNameTv.setText(user.getFullname());
+//                    userEmailTv.setText(user.getEmail());
                 } else {
                     auth.signOut();
                     finish();
