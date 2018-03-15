@@ -62,7 +62,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mDatabase = database.getReference("students");
+        mDatabase = database.getReference(AppConstant.FIREBASE_TABLE_STUDNET);
 
         initView();
 
@@ -109,6 +109,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.activity_signup_faculty_registration_tv:
                 Intent gotoFacultyRegistration = new Intent(SignupActivity.this, FacultyRegistrationActivity.class);
                 startActivity(gotoFacultyRegistration);
+                finish();
                 break;
         }
     }
@@ -183,4 +184,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+
 }

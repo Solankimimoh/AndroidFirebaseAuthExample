@@ -35,7 +35,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
     private TextView gotoLogin;
     private Button facultySignupBtn;
 
-    //    Faculty String Varible
+    //    Faculty String Variable
 
     private String fullname;
     private String email;
@@ -58,8 +58,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
         auth = FirebaseAuth.getInstance();
 
         // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mDatabase = database.getReference("faculties");
+        mDatabase = FirebaseDatabase.getInstance().getReference(AppConstant.FIREBASE_TABLE_FACULTY);
 
         initView();
 
@@ -84,7 +83,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
 
         progressDialog = new ProgressDialog(FacultyRegistrationActivity.this);
         progressDialog.setCancelable(false);
-        progressDialog.setTitle("Singup");
+        progressDialog.setTitle("Signup");
         progressDialog.setMessage("Creating account");
     }
 
@@ -102,8 +101,8 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
     }
 
     private void signupFaculty() {
-        progressDialog.show();
 
+        progressDialog.show();
 
         fullname = fulllnameEd.getText().toString().trim();
         email = emailEd.getText().toString().trim();
@@ -113,21 +112,19 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(FacultyRegistrationActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
+                Log.e("TAG","CREATE USER");
                 if (!task.isSuccessful()) {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(FacultyRegistrationActivity.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
                         progressDialog.hide();
                     }
                 } else {
-                    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    String userId = user.getUid();
-
-                    mDatabase.child(userId).setValue(new FacultyModel(
-                            fullname
-                            , email
+                    String userId = auth.getCurrentUser().getUid();
+                    Log.e("TAG","INSERT USER");
+                    mDatabase.child(userId).setValue(new FacultyModel(mobile
                             , password
-                            , mobile
-                            , department, false), new DatabaseReference.CompletionListener() {
+                    ), new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             if (databaseError != null) {
@@ -136,16 +133,14 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
                                 Toast.makeText(FacultyRegistrationActivity.this, "Success ! Admin verify your account soon!", Toast.LENGTH_SHORT).show();
                                 Intent gotoLogin = new Intent(FacultyRegistrationActivity.this, LoginActivity.class);
                                 startActivity(gotoLogin);
-                                finish();
                                 progressDialog.hide();
+                                finish();
                             }
                         }
                     });
                 }
             }
         });
-
-
     }
 
     @Override

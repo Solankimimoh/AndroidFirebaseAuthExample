@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     final String TAG = LoginActivity.class.getSimpleName();
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(COLORATION);
@@ -94,7 +94,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         //Event Listener
-        loginTypeRg.setOnCheckedChangeListener(this);
         loginBtn.setOnClickListener(this);
         gotoSingup.setOnClickListener(this);
         gotoForgotoPwd.setOnClickListener(this);
@@ -127,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         if (mAwesomeValidation.validate()) {
-            //progressDialog.show();
+            progressDialog.show();
             progressDialog.setMessage("Check Email ID and password...");
 
             auth.signInWithEmailAndPassword(email, password)
@@ -138,14 +137,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.e(TAG, "signInWithEmail:success");
 
+                                progressDialog.setMessage("Email Verifying ....");
                                 switch (loginTypeRg.getCheckedRadioButtonId()) {
                                     case R.id.activity_login_faculty_rb:
-//                                        databaseReference
+                                        CheckEmailIsVerified(AppConstant.FIREBASE_TABLE_FACULTY);
                                         break;
                                     case R.id.activity_login_student_rb:
+                                        CheckEmailIsVerified(AppConstant.FIREBASE_TABLE_STUDNET);
                                         break;
                                 }
-                                progressDialog.setMessage("Email Verifying ....");
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.e(TAG, "signInWithEmail:failure", task.getException());
@@ -155,58 +156,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                     });
-//            databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    FacultyModel facultyModel = dataSnapshot.getValue(FacultyModel.class);
-//                    Toast.makeText(LoginActivity.this, facultyModel.isActivated() + "", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//
-//                }
-//            });
-
 
         }
 
 
     }
+
+    private void CheckEmailIsVerified(String firebaseTable) {
+
+        databaseReference.child(firebaseTable).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (!dataSnapshot.hasChild(auth.getCurrentUser().getUid())) {
+                    Toast.makeText(LoginActivity.this, "Credentials not match with login type", Toast.LENGTH_SHORT).show();
+                    progressDialog.hide();
+                } else {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        Log.e("TAG", data.child("isIsactivated").getValue().toString());
+                        boolean status = Boolean.parseBoolean(data.child("isIsactivated").getValue().toString());
+                        if (status) {
+                            //do ur stuff
+                            progressDialog.hide();
+                            Toast.makeText(LoginActivity.this, "Email ID is not verified yet ! ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            progressDialog.hide();
+                            //do something
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(LoginActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 
     @Override
-    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-        switch (radioGroup.getCheckedRadioButtonId()) {
-            case R.id.activity_login_faculty_rb:
-
-                break;
-            case R.id.activity_login_student_rb:
-                break;
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        progressDialog.dismiss();
     }
-
-//    private void checkAccountVerified() {
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user.isEmailVerified()) {
-//            // user is verified, so you can finish this activity or send user to activity which you want.
-//            // finish();
-//            progressDialog.hide();
-//            emailEd.setText("");
-//            pwdEd.setText("");
-//            Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
-//            Intent gotoHome = new Intent(LoginActivity.this, HomeActivity.class);
-//            startActivity(gotoHome);
-//        } else {
-//            // email is not verified, so just prompt the message to the user and restart this activity.
-//            // NOTE: don't forget to log out the user.
-//            progressDialog.hide();
-//            Toast.makeText(LoginActivity.this, "Please Verified your email", Toast.LENGTH_SHORT).show();
-//            FirebaseAuth.getInstance().signOut();
-//            //restart this activity
-//        }
-//    }
-
-
 }
 

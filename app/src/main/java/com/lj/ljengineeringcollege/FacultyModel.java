@@ -10,18 +10,23 @@ public class FacultyModel {
     private String password;
     private String mobile;
     private String department;
-    private boolean isActivated;
+    private boolean isactivated;
 
-    public FacultyModel() {
-    }
-
-    public FacultyModel(String fullname, String email, String password, String mobile, String department, boolean isActivated) {
+    public FacultyModel(String fullname, String email, String password, String mobile, String department, boolean isactivated) {
         this.fullname = fullname;
         this.email = email;
         this.password = password;
         this.mobile = mobile;
         this.department = department;
-        this.isActivated = isActivated;
+        this.isactivated = isactivated;
+    }
+
+    public FacultyModel(String fullname, String email) {
+        this.fullname = fullname;
+        this.email = email;
+    }
+
+    public FacultyModel() {
     }
 
     public String getFullname() {
@@ -64,11 +69,11 @@ public class FacultyModel {
         this.department = department;
     }
 
-    public boolean isActivated() {
-        return isActivated;
+    public boolean isIsactivated() {
+        return isactivated;
     }
 
-    public void setActivated(boolean activated) {
-        isActivated = activated;
+    public void setIsActivated(boolean isActivated) {
+        this.isactivated = isActivated;
     }
 }

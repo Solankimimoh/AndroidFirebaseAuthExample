@@ -6,36 +6,36 @@ package com.lj.ljengineeringcollege;
 
 public class StudentModel {
 
-    private String fullName;
+    private String fullname;
     private String email;
     private String password;
     private String enrollment;
     private String mobile;
     private String department;
     private String semester;
-    private boolean isActivated;
+    private boolean isactivated;
 
     public StudentModel() {
     }
 
 
-    public StudentModel(String fullName, String email, String password, String enrollment, String mobile, String department, String semester, boolean isActivated) {
-        this.fullName = fullName;
+    public StudentModel(String fullname, String email, String password, String enrollment, String mobile, String department, String semester, boolean isactivated) {
+        this.fullname = fullname;
         this.email = email;
         this.password = password;
         this.enrollment = enrollment;
         this.mobile = mobile;
         this.department = department;
         this.semester = semester;
-        this.isActivated = isActivated;
+        this.isactivated = isactivated;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getEmail() {
@@ -87,11 +87,11 @@ public class StudentModel {
     }
 
     public boolean getIsActivated() {
-        return isActivated;
+        return isactivated;
     }
 
     public void setIsActivated(boolean isActivated) {
-        this.isActivated = isActivated;
+        this.isactivated = isActivated;
     }
 
 }
