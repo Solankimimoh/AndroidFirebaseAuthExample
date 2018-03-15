@@ -3,6 +3,7 @@ package com.lj.ljengineeringcollege;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,65 +27,66 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewAdapter.ItemListener {
 
-    private FirebaseAuth auth;
+    //    Component Initlization
     private TextView userNameTv;
     private TextView userEmailTv;
-    private DatabaseReference DataRef;
     private RecyclerView recyclerView;
     private ArrayList<HomeMenuItemModel> arrayList;
 
+    //    Firebase Init
+    private DatabaseReference DataRef;
+    private FirebaseAuth auth;
+
+
+    //    variable
+    private String loginType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         auth = FirebaseAuth.getInstance();
-        DataRef = FirebaseDatabase.getInstance().getReference().child(AppConstant.FIREBASE_TABLE_STUDNET);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        DataRef = FirebaseDatabase.getInstance().getReference();
 
+        initView();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        final Intent intent = getIntent();
+        loginType = intent.getStringExtra("KEY_LOGIN_TYPE");
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         final View headerView = navigationView.getHeaderView(0);
 
         userNameTv = headerView.findViewById(R.id.nav_header_home_username);
         userEmailTv = headerView.findViewById(R.id.nav_header_home_email);
 
-        DataRef.child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                StudentModel user = dataSnapshot.getValue(StudentModel.class);
-                if (user != null) {
-//                    userNameTv.setText(user.getFullname());
-//                    userEmailTv.setText(user.getEmail());
-                } else {
-                    auth.signOut();
-                    finish();
-                }
+        DataRef.child(loginType)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-            }
+                        Toast.makeText(HomeActivity.this, "Welcome " + dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_FULLNAME).getValue().toString(), Toast.LENGTH_SHORT).show();
+                        final String userName = dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_FULLNAME).getValue().toString();
+                        final String userEmail = dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_EMAIL).getValue().toString();
+                        userNameTv.setText(userName);
+                        userEmailTv.setText(userEmail);
+                    }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.e("TAG", "Failed to read value.", error.toException());
+                    }
+                });
 
         arrayList = new ArrayList<>();
-        arrayList.add(new HomeMenuItemModel("Department", R.drawable.vector_aboutus, "#09A9FF"));
-        arrayList.add(new HomeMenuItemModel("Gallery", R.drawable.vector_email, "#3E51B1"));
-        arrayList.add(new HomeMenuItemModel("SBI FEES", R.drawable.vector_developer, "#673BB7"));
-        arrayList.add(new HomeMenuItemModel("Notification", R.drawable.vector_mobile, "#4BAA50"));
-        arrayList.add(new HomeMenuItemModel("About Us", R.drawable.vector_user, "#F94336"));
+        arrayList.add(new HomeMenuItemModel("Department", R.drawable.vector_department, "#09A9FF"));
+        arrayList.add(new HomeMenuItemModel("Gallery", R.drawable.vector_gallery, "#3E51B1"));
+        arrayList.add(new HomeMenuItemModel("SBI FEES", R.drawable.vector_fees, "#673BB7"));
+        arrayList.add(new HomeMenuItemModel("Notification", R.drawable.vector_notification, "#4BAA50"));
+        arrayList.add(new HomeMenuItemModel("About Us", R.drawable.vector_about_us, "#F94336"));
         arrayList.add(new HomeMenuItemModel("Contact Us", R.drawable.vector_location, "#0A9B88"));
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, arrayList, this);
@@ -94,6 +96,19 @@ public class HomeActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
 
 
+    }
+
+    private void initView() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     @Override

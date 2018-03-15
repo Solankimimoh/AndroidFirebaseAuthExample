@@ -57,11 +57,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-//        if (auth.getCurrentUser() != null) {
-//            auth.signOut();
-//            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-//            finish();
-//        }
+        if (auth.getCurrentUser() != null) {
+            auth.signOut();
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+        }
         initView();
 
 
@@ -127,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         if (mAwesomeValidation.validate()) {
+
             progressDialog.show();
             progressDialog.setMessage("Check Email ID and password...");
 
@@ -158,12 +159,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     });
 
+
         }
 
 
     }
 
-    private void CheckEmailIsVerified(String firebaseTable) {
+    private void CheckEmailIsVerified(final String firebaseTable) {
 
         databaseReference.child(firebaseTable).addValueEventListener(new ValueEventListener() {
             @Override
@@ -173,18 +175,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(LoginActivity.this, "Credentials not match with login type", Toast.LENGTH_SHORT).show();
                     progressDialog.hide();
                 } else {
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        Log.e("TAG", data.child(AppConstant.FIREBASE_DB_ISACTIVATED).getValue().toString());
-                        boolean status = Boolean.parseBoolean(data.child(AppConstant.FIREBASE_DB_ISACTIVATED).getValue().toString());
-                        if (status) {
-                            //do ur stuff
-                            progressDialog.hide();
-                        } else {
-                            progressDialog.hide();
-                            Toast.makeText(LoginActivity.this, "Email ID is not verified yet ! ", Toast.LENGTH_SHORT).show();
 
-                            //do something
-                        }
+                    Log.e("TAG USER", dataSnapshot.child(auth.getCurrentUser().getUid()) + "");
+
+                    final boolean status = Boolean.parseBoolean(dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_DB_ISACTIVATED).getValue().toString());
+
+                    if (!status) {
+                        Toast.makeText(LoginActivity.this, "" + status, Toast.LENGTH_SHORT).show();
+                        progressDialog.hide();
+                        Toast.makeText(LoginActivity.this, "Email ID is not verified yet ! ", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "" + status, Toast.LENGTH_SHORT).show();
+                        progressDialog.hide();
+                        Intent gotoHomeScreen = new Intent(LoginActivity.this, HomeActivity.class);
+                        gotoHomeScreen.putExtra("KEY_LOGIN_TYPE", firebaseTable);
+                        startActivity(gotoHomeScreen);
+                        finish();
                     }
                 }
 
