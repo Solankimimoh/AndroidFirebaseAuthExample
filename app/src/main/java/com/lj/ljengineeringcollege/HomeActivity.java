@@ -56,7 +56,11 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        if (loginType.equals(AppConstant.FIREBASE_TABLE_STUDNET)) {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.admin_menu);
 
+        }
         final View headerView = navigationView.getHeaderView(0);
 
         userNameTv = headerView.findViewById(R.id.nav_header_home_username);
@@ -133,6 +137,7 @@ public class HomeActivity extends AppCompatActivity
                 auth.signOut();
                 finish();
                 break;
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

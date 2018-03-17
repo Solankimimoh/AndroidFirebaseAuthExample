@@ -128,7 +128,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity implements Vi
                             password,
                             mobile,
                             department,
-                            false
+                            true
                     ), new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

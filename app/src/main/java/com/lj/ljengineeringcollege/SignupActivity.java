@@ -148,7 +148,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                                     , enrollment
                                                     , mobile
                                                     , department
-                                                    , semester, false),
+                                                    , semester, true),
                                             new DatabaseReference.CompletionListener() {
                                                 @Override
                                                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
