@@ -9,9 +9,13 @@
             android:icon="@drawable/vector_user"
             android:title="Profile" />
         <item
-            android:id="@+id/menu_studnt"
-            android:icon="@drawable/vector_user"
-            android:title="Profile" />
+            android:id="@+id/menu_aprove_student"
+            android:icon="@drawable/vector_developer"
+            android:title="Aprove Students" />
+        <item
+            android:id="@+id/menu_send_notification"
+            android:icon="@drawable/vector_notification"
+            android:title="Send Notification" />
         <item
             android:id="@+id/menu_signout"
             android:icon="@drawable/vector_logout"

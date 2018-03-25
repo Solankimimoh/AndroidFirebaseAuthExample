@@ -57,11 +57,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        if (auth.getCurrentUser() != null) {
-            auth.signOut();
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish();
-        }
+//        if (auth.getCurrentUser() != null) {
+//            auth.signOut();
+//            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//            finish();
+//        }
         initView();
 
 

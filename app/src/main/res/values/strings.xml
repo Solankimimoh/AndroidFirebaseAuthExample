@@ -29,6 +29,18 @@
     <string name="faculty_reg">Faculty Registration?</string>
     <string name="select_department">Select Department</string>
     <string name="select_semester">Select Semester</string>
+    <string name="department">Department</string>
+    <string name="gallery">Gallery</string>
+    <string name="sbifees">SBI FEES</string>
+    <string name="notification">Notification</string>
+    <string name="aboutus">About Us</string>
+    <string name="contactus">Contact Us</string>
+    <string name="dept_it">I.T.</string>
+    <string name="dept_computer">C.E.</string>
+    <string name="dept_mechanical">Mechanical</string>
+    <string name="dept_civil">Civil</string>
+    <string name="dept_chemical">Chemical</string>
+    <string name="dept_texttile">TextTile</string>
 
 
     <!--Department Array-->

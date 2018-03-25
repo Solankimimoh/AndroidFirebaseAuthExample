@@ -59,7 +59,11 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity
             android:name=".FacultyRegistrationActivity"
-            android:label="@string/faculty"></activity>
+            android:label="@string/faculty" />
+        <activity
+            android:name=".DepartmentListActivity"
+            android:label="@string/department" />
+        <activity android:name=".StudentReuqestListActivity"></activity>
     </application>
 
 </manifest>

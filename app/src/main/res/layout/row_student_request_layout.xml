@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/row_student_request_layout_icon_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:src="@drawable/vector_user" />
+
+    <TextView
+        android:id="@+id/row_layout_category_categoryname_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/row_student_request_layout_icon_img"
+        android:text="CategoryName"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        tools:text="@tools:sample/cities" />
+
+</RelativeLayout>

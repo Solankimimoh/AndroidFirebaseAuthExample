@@ -1,7 +1,9 @@
 package com.lj.ljengineeringcollege;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -52,51 +54,81 @@ public class HomeActivity extends AppCompatActivity
         initView();
 
         final Intent intent = getIntent();
-        loginType = intent.getStringExtra("KEY_LOGIN_TYPE");
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        if (loginType.equals(AppConstant.FIREBASE_TABLE_STUDNET)) {
-            navigationView.getMenu().clear();
-            navigationView.inflateMenu(R.menu.admin_menu);
+        if (loginType != null && !loginType.isEmpty()) {
+            Log.e("TAG_LOGIN", intent.getStringExtra("KEY_LOGIN_TYPE"));
+            Toast.makeText(this, "BTN" + intent.getStringExtra("KEY_LOGIN_TYPE"), Toast.LENGTH_SHORT).show();
 
+            if (loginType.equals(AppConstant.FIREBASE_TABLE_STUDNET)) {
+                loginType = intent.getStringExtra("KEY_LOGIN_TYPE");
+                navigationView.getMenu().clear();
+                navigationView.inflateMenu(R.menu.student_menu);
+                DataRef.child(loginType)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                Toast.makeText(HomeActivity.this, "Welcome " + dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_FULLNAME).getValue().toString(), Toast.LENGTH_SHORT).show();
+                                final String userName = dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_FULLNAME).getValue().toString();
+                                final String userEmail = dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_EMAIL).getValue().toString();
+                                userNameTv.setText(userName);
+                                userEmailTv.setText(userEmail);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+                                // Failed to read value
+                                Log.e("TAG", "Failed to read value.", error.toException());
+                            }
+                        });
+            } else if (loginType.equals(AppConstant.FIREBASE_TABLE_FACULTY)) {
+                Toast.makeText(this, "Faculty", Toast.LENGTH_SHORT).show();
+                loginType = intent.getStringExtra("KEY_LOGIN_TYPE");
+
+                DataRef.child(loginType)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                Toast.makeText(HomeActivity.this, "Welcome " + dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_FULLNAME).getValue().toString(), Toast.LENGTH_SHORT).show();
+                                final String userName = dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_FULLNAME).getValue().toString();
+                                final String userEmail = dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_EMAIL).getValue().toString();
+                                userNameTv.setText(userName);
+                                userEmailTv.setText(userEmail);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+                                // Failed to read value
+                                Log.e("TAG", "Failed to read value.", error.toException());
+                            }
+                        });
+            }
+        } else {
+            Toast.makeText(this, "ELSE", Toast.LENGTH_SHORT).show();
+            auth.signOut();
         }
+
         final View headerView = navigationView.getHeaderView(0);
 
         userNameTv = headerView.findViewById(R.id.nav_header_home_username);
         userEmailTv = headerView.findViewById(R.id.nav_header_home_email);
 
-        DataRef.child(loginType)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        Toast.makeText(HomeActivity.this, "Welcome " + dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_FULLNAME).getValue().toString(), Toast.LENGTH_SHORT).show();
-                        final String userName = dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_FULLNAME).getValue().toString();
-                        final String userEmail = dataSnapshot.child(auth.getCurrentUser().getUid()).child(AppConstant.FIREBASE_TABLE_EMAIL).getValue().toString();
-                        userNameTv.setText(userName);
-                        userEmailTv.setText(userEmail);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.e("TAG", "Failed to read value.", error.toException());
-                    }
-                });
 
         arrayList = new ArrayList<>();
-        arrayList.add(new HomeMenuItemModel("Department", R.drawable.vector_department, "#09A9FF"));
-        arrayList.add(new HomeMenuItemModel("Gallery", R.drawable.vector_gallery, "#3E51B1"));
-        arrayList.add(new HomeMenuItemModel("SBI FEES", R.drawable.vector_fees, "#673BB7"));
-        arrayList.add(new HomeMenuItemModel("Notification", R.drawable.vector_notification, "#4BAA50"));
-        arrayList.add(new HomeMenuItemModel("About Us", R.drawable.vector_about_us, "#F94336"));
-        arrayList.add(new HomeMenuItemModel("Contact Us", R.drawable.vector_location, "#0A9B88"));
+        arrayList.add(new HomeMenuItemModel(getString(R.string.department), R.drawable.vector_department, "#09A9FF"));
+        arrayList.add(new HomeMenuItemModel(getString(R.string.gallery), R.drawable.vector_gallery, "#3E51B1"));
+        arrayList.add(new HomeMenuItemModel(getString(R.string.sbifees), R.drawable.vector_fees, "#673BB7"));
+        arrayList.add(new HomeMenuItemModel(getString(R.string.notification), R.drawable.vector_notification, "#4BAA50"));
+        arrayList.add(new HomeMenuItemModel(getString(R.string.aboutus), R.drawable.vector_about_us, "#F94336"));
+        arrayList.add(new HomeMenuItemModel(getString(R.string.contactus), R.drawable.vector_location, "#0A9B88"));
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, arrayList, this);
         recyclerView.setAdapter(adapter);
 
-        AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager(this, 500);
+        AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager(this, 300);
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -138,6 +170,11 @@ public class HomeActivity extends AppCompatActivity
                 finish();
                 break;
 
+            case R.id.menu_aprove_student:
+                final Intent gotoStudentRequest = new Intent(HomeActivity.this, StudentReuqestListActivity.class);
+                startActivity(gotoStudentRequest);
+                break;
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -146,13 +183,26 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(HomeMenuItemModel item) {
-        switch (item.text) {
 
-            case "Contact Us":
-                Toast.makeText(this, "location", Toast.LENGTH_SHORT).show();
-                Intent gotoLocation = new Intent(HomeActivity.this, CollegeLocationActivity.class);
-                startActivity(gotoLocation);
-                break;
+
+        if (item.text.equals(getString(R.string.contactus))) {
+            final Intent gotoLocation = new Intent(HomeActivity.this, CollegeLocationActivity.class);
+            startActivity(gotoLocation);
+        } else if (item.text.equals(getString(R.string.sbifees))) {
+            openSBITab();
+        } else if (item.text.equals(getString(R.string.department))) {
+            final Intent gotoDepartment = new Intent(HomeActivity.this, DepartmentListActivity.class);
+            startActivity(gotoDepartment);
         }
     }
+
+    private void openSBITab() {
+        String url = "https://www.onlinesbi.com/prelogin/institutiontypedisplay.htm";
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(this, Uri.parse(url));
+    }
+
+
 }
