@@ -187,6 +187,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     } else {
                         Toast.makeText(LoginActivity.this, "" + status, Toast.LENGTH_SHORT).show();
                         progressDialog.hide();
+                        Toast.makeText(LoginActivity.this, firebaseTable, Toast.LENGTH_SHORT).show();
                         Intent gotoHomeScreen = new Intent(LoginActivity.this, HomeActivity.class);
                         gotoHomeScreen.putExtra("KEY_LOGIN_TYPE", firebaseTable);
                         startActivity(gotoHomeScreen);
