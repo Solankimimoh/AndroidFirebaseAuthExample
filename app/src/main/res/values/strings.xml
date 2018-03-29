@@ -41,6 +41,8 @@
     <string name="dept_civil">Civil</string>
     <string name="dept_chemical">Chemical</string>
     <string name="dept_texttile">TextTile</string>
+    <string name="approve_st">Approve</string>
+    <string name="cancle">Cancle</string>
 
 
     <!--Department Array-->

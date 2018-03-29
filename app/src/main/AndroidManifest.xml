@@ -63,7 +63,8 @@
         <activity
             android:name=".DepartmentListActivity"
             android:label="@string/department" />
-        <activity android:name=".StudentReuqestListActivity"></activity>
+        <activity android:name=".StudentReuqestListActivity" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

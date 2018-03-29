@@ -55,14 +55,16 @@ public class HomeActivity extends AppCompatActivity
 
         final Intent intent = getIntent();
 
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        if (loginType != null && !loginType.isEmpty()) {
-            Log.e("TAG_LOGIN", intent.getStringExtra("KEY_LOGIN_TYPE"));
-            Toast.makeText(this, "BTN" + intent.getStringExtra("KEY_LOGIN_TYPE"), Toast.LENGTH_SHORT).show();
+        if (intent.hasExtra("KEY_LOGIN_TYPE")) {
+
+            loginType = intent.getStringExtra("KEY_LOGIN_TYPE");
+
 
             if (loginType.equals(AppConstant.FIREBASE_TABLE_STUDNET)) {
-                loginType = intent.getStringExtra("KEY_LOGIN_TYPE");
+
                 navigationView.getMenu().clear();
                 navigationView.inflateMenu(R.menu.student_menu);
                 DataRef.child(loginType)
@@ -107,7 +109,6 @@ public class HomeActivity extends AppCompatActivity
                         });
             }
         } else {
-            Toast.makeText(this, "ELSE", Toast.LENGTH_SHORT).show();
             auth.signOut();
         }
 
@@ -178,7 +179,7 @@ public class HomeActivity extends AppCompatActivity
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return false;
     }
 
     @Override
