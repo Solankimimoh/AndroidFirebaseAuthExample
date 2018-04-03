@@ -2,9 +2,9 @@ package com.lj.ljengineeringcollege;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -148,7 +148,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                                     , enrollment
                                                     , mobile
                                                     , department
-                                                    , semester, true),
+                                                    , semester, false),
                                             new DatabaseReference.CompletionListener() {
                                                 @Override
                                                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

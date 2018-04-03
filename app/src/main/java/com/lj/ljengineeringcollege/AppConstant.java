@@ -15,8 +15,22 @@ public class AppConstant {
     final static String FIREBASE_TABLE_EMAIL = "email";
     final static String FIREBASE_TABLE_ENROLLMENT = "enrollment";
     final static String FIREBASE_TABLE_MOBILE = "mobile";
-    final static String FIREBASE_DB_ROOT = "ljcollege-f7620";
+    final static String FIREBASE_TABLE_NOTIFICATION = "notification";
     final static String FIREBASE_DB_ISACTIVATED = "isActivated";
 
 
+    //   NOTIFICATION DEPARTMENT
+    final static String FIREBASE_DEPARTMENT_INFORMATION_TECHNOLOGY = "information_technology";
+    final static String FIREBASE_DEPARTMENT_COMPUTER_ENGINEERING = "computer_engineering";
+
+
+    public static final String FIREBASE_NOTIFICATION_BASE_URL_TOPIC = "/topics/";
+
+
+    //    FIREBASE TOPICS LINKS
+    public static final String FIREBASE_NOTIFICATION_DEPARTMENT_INFORMATION_TECHNOLOGY = FIREBASE_NOTIFICATION_BASE_URL_TOPIC + FIREBASE_DEPARTMENT_INFORMATION_TECHNOLOGY;
+    public static final String FIREBASE_NOTIFICATION_DEPARTMENT_COMPUTER_ENGINEERING = FIREBASE_NOTIFICATION_BASE_URL_TOPIC + FIREBASE_DEPARTMENT_COMPUTER_ENGINEERING;
+
+    //FIREBASE STORAGE Constance
+    public static final String STORAGE_PATH_UPLOADS_NOTIFICATION = "notification/";
 }

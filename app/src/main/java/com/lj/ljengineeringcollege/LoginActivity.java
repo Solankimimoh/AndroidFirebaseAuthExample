@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 //        if (auth.getCurrentUser() != null) {
 //            auth.signOut();
-//            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//            Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
 //            startActivity(intent);
 //            finish();
 //        }
@@ -188,8 +187,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         progressDialog.hide();
                         Toast.makeText(LoginActivity.this, "Email ID is not verified yet ! ", Toast.LENGTH_SHORT).show();
                     } else {
-                        progressDialog.hide();
-                        Intent gotoHomeScreen = new Intent(LoginActivity.this, HomeActivity.class);
+                        progressDialog.dismiss();
+
+                        Intent gotoHomeScreen = new Intent(LoginActivity.this, HomeScreenActivity.class);
                         gotoHomeScreen.putExtra("KEY_LOGIN_TYPE", firebaseTable);
                         startActivity(gotoHomeScreen);
                         finish();

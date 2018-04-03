@@ -14,7 +14,7 @@
         android:layout_marginBottom="8dp"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:src="@mipmap/clg_bg"
+        android:src="@drawable/clg_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
