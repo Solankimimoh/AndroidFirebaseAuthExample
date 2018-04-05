@@ -10,6 +10,7 @@ public class AppConstant {
     //    DATABASE
     final static String FIREBASE_TABLE_STUDNET = "students";
     final static String FIREBASE_TABLE_FACULTY = "faculties";
+    final static String FIREBASE_DETAILS_FACULTY = "faculty";
     final static String FIREBASE_DEPARTMENT = "department";
     final static String FIREBASE_TABLE_FULLNAME = "fullname";
     final static String FIREBASE_TABLE_EMAIL = "email";

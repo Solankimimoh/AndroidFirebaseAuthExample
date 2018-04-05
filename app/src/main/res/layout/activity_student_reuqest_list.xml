@@ -8,6 +8,8 @@
     tools:context=".StudentReuqestListActivity">
 
     <ListView
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:id="@+id/activity_view_category_list_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

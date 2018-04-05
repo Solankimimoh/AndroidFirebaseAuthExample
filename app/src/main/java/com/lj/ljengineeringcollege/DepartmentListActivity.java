@@ -1,5 +1,6 @@
 package com.lj.ljengineeringcollege;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +32,7 @@ public class DepartmentListActivity extends AppCompatActivity implements Recycle
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(DepartmentListActivity.this, arrayList, this);
         recyclerView.setAdapter(adapter);
 
-        AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager(this, 300);
+        AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager(this, 600);
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -45,6 +46,8 @@ public class DepartmentListActivity extends AppCompatActivity implements Recycle
 
     @Override
     public void onItemClick(HomeMenuItemModel item) {
-
+        final Intent gotoDepartmentDetails = new Intent(DepartmentListActivity.this, DepartmentDetailsActivity.class);
+        gotoDepartmentDetails.putExtra("KEY_DEPARTMENT", item.text);
+        startActivity(gotoDepartmentDetails);
     }
 }

@@ -35,12 +35,12 @@
     <string name="notification">Notification</string>
     <string name="aboutus">About Us</string>
     <string name="contactus">Contact Us</string>
-    <string name="dept_it">I.T.</string>
-    <string name="dept_computer">C.E.</string>
-    <string name="dept_mechanical">Mechanical</string>
-    <string name="dept_civil">Civil</string>
-    <string name="dept_chemical">Chemical</string>
-    <string name="dept_texttile">TextTile</string>
+    <string name="dept_it">Information technology</string>
+    <string name="dept_computer">Computer engineering</string>
+    <string name="dept_mechanical">Mechanical engineering</string>
+    <string name="dept_civil">Civil engineering</string>
+    <string name="dept_chemical">Chemical engineering</string>
+    <string name="dept_texttile">Electrical engineering</string>
     <string name="approve_st">Approve</string>
     <string name="cancle">Cancle</string>
     <string name="google_maps_key">AIzaSyCcCHxsQPXtn4Z5ZXm_YKd3Jgdd_3SKsy8</string>
@@ -55,6 +55,10 @@
     <string name="send">Send</string>
     <string name="nofile_selected">No File Selected</string>
     <string name="send_notification">Send Notification</string>
+    <string name="downloadfile">Download File</string>
+    <string name="details">Details</string>
+    <string name="faculty_designation">DESIGNATION</string>
+    <string name="faculty_qualification">QUALIFICATION</string>
 
 
     <!--Department Array-->

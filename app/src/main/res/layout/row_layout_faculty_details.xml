@@ -1,0 +1,146 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardView.Light"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp">
+
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/row_layout_faculty_details_profile_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:elevation="5dp"
+            android:src="@drawable/clg_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/row_layout_faculty_details_faculty_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:maxLines="1"
+            android:text="NAME"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_profile_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/row_layout_faculty_details_designation_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@null"
+            android:src="@drawable/vector_enrollment"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_profile_img"
+            app:layout_constraintTop_toBottomOf="@+id/row_layout_faculty_details_faculty_name" />
+
+        <TextView
+            android:id="@+id/row_layout_faculty_details_designation_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+
+            android:layout_marginTop="8dp"
+            android:maxLines="1"
+            android:text="@string/faculty_designation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_designation_title"
+            app:layout_constraintTop_toBottomOf="@+id/row_layout_faculty_details_faculty_name" />
+
+        <ImageView
+            android:id="@+id/row_layout_faculty_details_qualification_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@null"
+            android:src="@drawable/vector_qualification"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_profile_img"
+            app:layout_constraintTop_toBottomOf="@+id/row_layout_faculty_details_designation_title" />
+
+        <TextView
+            android:id="@+id/row_layout_faculty_details_qualification_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:maxLines="1"
+            android:text="TextView"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_qualification_title"
+            app:layout_constraintTop_toBottomOf="@+id/row_layout_faculty_details_designation_tv" />
+
+        <ImageView
+            android:id="@+id/row_layout_faculty_details_experience_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/vector_experience"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_profile_img"
+            app:layout_constraintTop_toBottomOf="@+id/row_layout_faculty_details_qualification_title" />
+
+        <TextView
+            android:id="@+id/row_layout_faculty_details_experience_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+
+            android:maxLines="1"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_experience_title"
+            app:layout_constraintTop_toBottomOf="@+id/row_layout_faculty_details_qualification_tv" />
+
+        <ImageView
+            android:id="@+id/row_layout_faculty_details_interest_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/vector_interest"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_profile_img"
+            app:layout_constraintTop_toBottomOf="@+id/row_layout_faculty_details_experience_title" />
+
+        <TextView
+            android:id="@+id/row_layout_faculty_details_interest_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:maxLines="1"
+
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_layout_faculty_details_interest_title"
+            app:layout_constraintTop_toBottomOf="@+id/row_layout_faculty_details_experience_tv" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:id="@+id/row_layout_notification_list_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:padding="10dp"
+        android:src="@drawable/vector_notification" />
+
+    <TextView
+        android:id="@+id/row_layout_notification_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/row_layout_notification_list_img"
+        android:ellipsize="end"
+        android:maxEms="9"
+        android:maxLines="1"
+        android:text="@string/title_activity_college_location"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/row_layout_notification_message_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row_layout_notification_title_tv"
+        android:layout_toEndOf="@id/row_layout_notification_list_img"
+        android:ellipsize="end"
+        android:maxEms="11"
+        android:maxLines="1"
+        android:text="@string/student_aprove"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <ImageView
+        android:id="@+id/row_layout_notification_list_attachment_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@null"
+        android:padding="10dp"
+        android:src="@drawable/vector_attachment" />
+
+</RelativeLayout>

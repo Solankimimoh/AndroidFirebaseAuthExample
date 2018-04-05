@@ -47,6 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void setData(HomeMenuItemModel item) {
             this.item = item;
 
+
             textView.setText(item.text);
             imageView.setImageResource(item.drawable);
             relativeLayout.setBackgroundColor(Color.parseColor(item.color));

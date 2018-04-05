@@ -8,12 +8,12 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_department_list_recyleview"
+        android:id="@+id/activity_faculty_details_recycleview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/row_layout_home" />
+        tools:listitem="@layout/row_layout_faculty_details" />
 
 
 </RelativeLayout>

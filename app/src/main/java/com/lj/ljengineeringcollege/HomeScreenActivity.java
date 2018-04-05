@@ -215,6 +215,9 @@ public class HomeScreenActivity extends AppCompatActivity
         } else if (item.text.equals(getString(R.string.aboutus))) {
             final Intent gotoAboutUs = new Intent(HomeScreenActivity.this, AboutActivity.class);
             startActivity(gotoAboutUs);
+        } else if (item.text.equals(getString(R.string.notification))) {
+            final Intent gotoShowNotification = new Intent(HomeScreenActivity.this, ShowNotificationActivity.class);
+            startActivity(gotoShowNotification);
         }
     }
 

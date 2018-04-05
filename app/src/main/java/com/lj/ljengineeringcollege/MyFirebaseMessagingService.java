@@ -1,6 +1,10 @@
 package com.lj.ljengineeringcollege;
 
 import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
@@ -19,10 +23,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
+        Intent intent = new Intent(this, ShowNotificationActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         Notification notification = new NotificationCompat.Builder(this)
                 .setContentTitle(remoteMessage.getNotification().getBody())
                 .setContentText(remoteMessage.getNotification().getTitle())
                 .setSmallIcon(R.drawable.lj_logo)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent)
                 .build();
         NotificationManagerCompat manager = NotificationManagerCompat.from(getApplicationContext());
         manager.notify(123, notification);
@@ -54,10 +65,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String title, String body) {
+        Intent intent = new Intent(this, ShowNotificationActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
         Notification notif = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(body)
+                .setContentIntent(pendingIntent)
                 .build();
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);

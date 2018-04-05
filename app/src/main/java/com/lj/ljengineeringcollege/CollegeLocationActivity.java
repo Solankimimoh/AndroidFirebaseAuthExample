@@ -39,8 +39,8 @@ public class CollegeLocationActivity extends FragmentActivity implements OnMapRe
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng ljcollege = new LatLng(23.083799, 72.530573);
-        mMap.addMarker(new MarkerOptions().position(ljcollege).title("Ranchhodlal Chhotalal Technical Institute"));
+        LatLng ljcollege = new LatLng(23.0344799, 72.530573);
+        mMap.addMarker(new MarkerOptions().position(ljcollege).title("L.J. Institute"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ljcollege,14));
 //        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
     }

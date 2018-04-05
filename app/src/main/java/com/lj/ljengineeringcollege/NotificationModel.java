@@ -8,6 +8,10 @@ public class NotificationModel {
     private String filename;
     private String fileUrl;
 
+
+    public NotificationModel() {
+    }
+
     public NotificationModel(String department, String title, String description, String filename, String fileUrl) {
         this.department = department;
         this.title = title;
