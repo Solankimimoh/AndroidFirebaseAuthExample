@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <ImageView
+        android:id="@+id/activity_profile_logo"
+        android:layout_width="75dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_profile_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/lj_logo" />
+
+    <TextView
+        android:id="@+id/activity_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="27dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/vector_user"
+        android:text="TextView"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/activity_profile_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_logo" />
+
+    <TextView
+        android:id="@+id/activity_profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/vector_email"
+        android:text="TextView"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/activity_profile_mobile"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_name"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_name" />
+
+    <TextView
+        android:id="@+id/activity_profile_mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/vector_mobile"
+        android:text="TextView"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/activity_profile_department"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_email"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_email" />
+
+    <TextView
+        android:id="@+id/activity_profile_department"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/vector_department"
+        android:text="TextView"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/activity_profile_enrollment"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_mobile"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_mobile" />
+
+    <TextView
+        android:id="@+id/activity_profile_enrollment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="188dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/vector_enrollment"
+        android:text="TextView"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/activity_profile_department"
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_department" />
+</android.support.constraint.ConstraintLayout>

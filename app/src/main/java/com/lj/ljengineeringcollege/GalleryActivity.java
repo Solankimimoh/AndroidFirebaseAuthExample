@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class GalleryActivity extends AppCompatActivity implements GalleryAdapter.ItemListener {
+public class GalleryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ArrayList<GalleryModel> galleryModelArrayList;
@@ -69,11 +70,31 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
             }
         });
 
-        galleryAdapter = new GalleryAdapter(GalleryActivity.this, galleryModelArrayList, this);
+        galleryAdapter = new GalleryAdapter(GalleryActivity.this, galleryModelArrayList);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(GalleryActivity.this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(galleryAdapter);
+
+
+        recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getApplicationContext(), recyclerView, new GalleryAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("images", galleryModelArrayList);
+                bundle.putInt("position", position);
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
+                newFragment.setArguments(bundle);
+                newFragment.show(ft, "slideshow");
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
 
     }
@@ -88,17 +109,18 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
         galleryModelArrayList = new ArrayList<>();
     }
 
-    @Override
-    public void onItemClick(GalleryModel item, int position) {
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("images", galleryModelArrayList);
-        bundle.putInt("position", position);
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
-        newFragment.setArguments(bundle);
-        newFragment.show(ft, "slideshow");
-
-    }
+//    @Override
+//    public void onItemClick(GalleryModel item, int position) {
+//
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("images", galleryModelArrayList);
+//        Log.e("position", position+"");
+//        bundle.putInt("position", position);
+//
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
+//        newFragment.setArguments(bundle);
+//        newFragment.show(ft, "slideshow");
+//
+//    }
 }

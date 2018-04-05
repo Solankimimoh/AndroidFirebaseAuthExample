@@ -3,7 +3,9 @@ package com.lj.ljengineeringcollege;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,25 +19,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     private Context context;
     private ArrayList<GalleryModel> galleryModelArrayList;
-    protected ItemListener mListener;
     int position;
 
 
-    public GalleryAdapter(Context context, ArrayList<GalleryModel> galleryModelArrayList, ItemListener mListener) {
+    public GalleryAdapter(Context context, ArrayList<GalleryModel> galleryModelArrayList) {
         this.context = context;
         this.galleryModelArrayList = galleryModelArrayList;
-        this.mListener = mListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
 
         private ImageView imageView;
         private GalleryModel galleryModel;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            itemView.setOnClickListener(this);
 
             imageView = itemView.findViewById(R.id.row_layout_gallery_imgview);
         }
@@ -57,12 +55,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
         }
 
-        @Override
-        public void onClick(View v) {
-            if (mListener != null) {
-                mListener.onItemClick(galleryModel, position);
-            }
-        }
+
     }
 
 
@@ -85,8 +78,54 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     }
 
 
-    public interface ItemListener {
-        void onItemClick(GalleryModel item, int position);
+
+
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
     }
 
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private GalleryAdapter.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final GalleryAdapter.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
+    }
 }

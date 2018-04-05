@@ -194,6 +194,12 @@ public class HomeScreenActivity extends AppCompatActivity
                 final Intent gotoSendNotification = new Intent(HomeScreenActivity.this, SendNotificatioActivity.class);
                 startActivity(gotoSendNotification);
                 break;
+            case R.id.menu_profile:
+                final Intent gotoProfile = new Intent(HomeScreenActivity.this, ProfileActivity.class);
+                gotoProfile.putExtra("KEY_LOGIN_TYPE", loginType);
+                startActivity(gotoProfile);
+
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
