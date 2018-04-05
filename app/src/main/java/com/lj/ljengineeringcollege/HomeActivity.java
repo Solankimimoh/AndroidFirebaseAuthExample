@@ -188,19 +188,24 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onItemClick(HomeMenuItemModel item) {
 
-
-        if (item.text.equals(getString(R.string.contactus))) {
-            final Intent gotoLocation = new Intent(HomeActivity.this, CollegeLocationActivity.class);
-            startActivity(gotoLocation);
-        } else if (item.text.equals(getString(R.string.sbifees))) {
-            openSBITab();
-        } else if (item.text.equals(getString(R.string.department))) {
-            final Intent gotoDepartment = new Intent(HomeActivity.this, DepartmentListActivity.class);
-            startActivity(gotoDepartment);
-        } else if (item.text.equals(getString(R.string.aboutus))) {
-            final Intent gotoAboutUs = new Intent(HomeActivity.this, AboutActivity.class);
-            startActivity(gotoAboutUs);
-        }
+//
+//        if (item.text.equals(getString(R.string.contactus))) {
+//            final Intent gotoLocation = new Intent(HomeActivity.this, CollegeLocationActivity.class);
+//            startActivity(gotoLocation);
+//        } else if (item.text.equals(getString(R.string.sbifees))) {
+//            openSBITab();
+//        } else if (item.text.equals(getString(R.string.department))) {
+//            final Intent gotoDepartment = new Intent(HomeActivity.this, DepartmentListActivity.class);
+//            startActivity(gotoDepartment);
+//        } else if (item.text.equals(getString(R.string.aboutus))) {
+//            Toast.makeText(this, "GALLERY2", Toast.LENGTH_SHORT).show();
+//            final Intent gotoAboutUs = new Intent(HomeActivity.this, AboutActivity.class);
+//            startActivity(gotoAboutUs);
+//        } else if (item.text.equals(getString(R.string.gallery))) {
+//            Toast.makeText(this, "GALLERY", Toast.LENGTH_SHORT).show();
+//            final Intent gotoGallery = new Intent(HomeActivity.this, GalleryActivity.class);
+//            startActivity(gotoGallery);
+//        }
     }
 
     private void openSBITab() {

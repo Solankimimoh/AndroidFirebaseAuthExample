@@ -218,6 +218,10 @@ public class HomeScreenActivity extends AppCompatActivity
         } else if (item.text.equals(getString(R.string.notification))) {
             final Intent gotoShowNotification = new Intent(HomeScreenActivity.this, ShowNotificationActivity.class);
             startActivity(gotoShowNotification);
+        } else if (item.text.equals(getString(R.string.gallery))) {
+            Toast.makeText(this, "GALLERY", Toast.LENGTH_SHORT).show();
+            final Intent gotoGallery = new Intent(HomeScreenActivity.this, GalleryActivity.class);
+            startActivity(gotoGallery);
         }
     }
 
